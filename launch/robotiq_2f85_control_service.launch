@@ -1,0 +1,9 @@
+<!-- USAGE: roslaunch robotiq_2f85_control_service robotiq_2f85_control_service.launch simulation:=false gripperTTY:=/dev/ttyUSB0 -->
+<launch>
+	<arg name="simulation" default="true" />
+	<arg name="gripperTTY" default="/dev/ttyUSB0" />
+
+	<node if="$(arg simulation)"     pkg="robotiq_2f85_control_service" type="robotiq_2f85_control_service_node" name="gripper_2f85_position_server" output="screen" args="simulation" />
+	<node unless="$(arg simulation)" pkg="robotiq_2f85_control_service" type="robotiq_2f85_control_service_node" name="gripper_2f85_position_server" output="screen" args="realworld" />
+	<node unless="$(arg simulation)" pkg="robotiq_2f_gripper_control" name="robotiq_2f_gripper_control" type="Robotiq2FGripperRtuNode.py" output="screen" args="$(arg gripperTTY)" />
+</launch>
