@@ -11,7 +11,7 @@
 #include <gazebo_msgs/JointRequest.h>
 #include <robotiq_2f_gripper_control/Robotiq2FGripper_robot_input.h>
 #include <robotiq_2f_gripper_control/Robotiq2FGripper_robot_output.h>
-#include "gripper_2f85/SetPosition.h"
+#include <robotiq_2f85_control_service/SetPosition.h>
 
 //If argv[1] == 'realworld', set this to true.
 bool SIMULATION = false;
@@ -62,8 +62,8 @@ ros::Subscriber gripper_state_sub;
 ros::Subscriber joint_states_sub;
 
 //This function gets called whenever a node request our service
-bool setPosition(   gripper_2f85::SetPosition::Request  &req,
-                    gripper_2f85::SetPosition::Response &res)
+bool setPosition(   robotiq_2f85_control_service::SetPosition::Request  &req,
+                    robotiq_2f85_control_service::SetPosition::Response &res)
 {
     currentGoalPosition = req.GoalPosition;
     ROS_INFO("Setting gripper goal to: %d",currentGoalPosition);
